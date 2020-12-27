@@ -7,7 +7,7 @@ A tool for automatically liking all of a user's posts on OnlyFans
 You know how sometimes there's OnlyFans creators who will message you saying something along the lines of: "Like all of my posts and I'll send you something special 😘"? Sometimes they might only have 20 or 30 posts, so it's not *too* bad. But what if they have *hundreds*? Maybe even ***thousands***? Well, this script will take of that for you.
  
 # Installation
-This tool only requires the [requests](https://github.com/psf/requests) library so if you already have it, you're good to go. Head on down to the 'Configuration' section!
+This tool only requires the [requests](https://github.com/psf/requests) library so if you already have it, you're good to go. Head on down to the [Configuration](#configuration) section!
  
 Otherwise, run the following in your terminal:
 ```sh
@@ -27,7 +27,7 @@ In order to use this, you are going to need to fill out a few fields in the `aut
 ```
 *Note: you will only need to fill out* `auth_uniq_` *if you have 2FA (two-factor authentication) enabled*
 
-If you're familiar with [DIGITALCRIMINAL's script](https://github.com/DIGITALCRIMINAL/OnlyFans), then great! All you have to do is copy the fields you filled out for that `auth.json` and paste them into this one!
+If you're familiar with [DIGITALCRIMINAL's script](https://github.com/DIGITALCRIMINAL/OnlyFans), then great! All you have to do is copy the fields you filled out for that `auth.json` and paste them into this one! Now, you can go down to the [Usage](#usage) section.
 
 If you're not, then don't worry; it's not hard to get them.
 
