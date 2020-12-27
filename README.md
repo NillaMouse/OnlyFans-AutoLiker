@@ -1,8 +1,10 @@
 # OnlyFans-AutoLiker
 A tool for automatically liking all of a user's posts on OnlyFans
 
+<img src="https://raw.githubusercontent.com/Amenly/OnlyFans-AutoLiker/main/images/autoliker.gif">
+
 # Preface
-You know how sometimes there's OnlyFans creators who will message you saying something along the lines of: 'Like all of my posts and I'll send you something special 😘'? Sometimes they might only have 20 or 30 posts, so it's not *too* bad. But what if they have *hundreds*? Maybe even ***thousands***? Well, this script will take of that for you.
+You know how sometimes there's OnlyFans creators who will message you saying something along the lines of: "Like all of my posts and I'll send you something special 😘"? Sometimes they might only have 20 or 30 posts, so it's not *too* bad. But what if they have *hundreds*? Maybe even ***thousands***? Well, this script will take of that for you.
  
 # Installation
 This tool only requires the [requests](https://github.com/psf/requests) library so if you already have it, you're good to go. Head on down to the 'Configuration' section!
@@ -41,7 +43,11 @@ In order to get the proper values for those fields, open your web browser, go to
 
 Once you have the developer tools open, you need to click on the tab called `Network` and then click `XHR`:
 
+<img src="https://raw.githubusercontent.com/Amenly/OnlyFans-AutoLiker/main/images/network-xhr-init.png">
+
 Refresh the page if you don't see a field that starts with `init?app-token`. Once you see it, click on it and scroll down while in the `Headers` tab until you see a subsection called `Request Headers`. Inside of this subsection are two fields called `cookie` and `user-agent`. These are the two fields you need:
+
+<img src="https://raw.githubusercontent.com/Amenly/OnlyFans-AutoLiker/main/images/cookie-user_agent.png">
 
 Inside `cookie`, you should find your `sess` and `auth_id` cookies (as well as your `auth_uniq_` cookie if you have 2FA enabled). Copy their corresponding values and paste them into their corresponding spots in the `auth.json` file. Finally, copy what's next to the `user-agent` field and paste it into the `auth.json` file as well.
 
@@ -78,8 +84,11 @@ $ python3 autoliker.py lenatheplugxxx
 
 # Things to Note
 1. The script runs slowly
+
 You may notice that the script sure does take its sweet, sweet time. This is intentional. I have the script set up to like post after post at a rate that seems 'organic' or 'human'. If you're using it on someone with a million posts, just let it run in the background and do something else.
+
 2. Use it at your own risk
+
 This kind of builds off of the first point. With the current speed, nothing bad should happen but I am ***not*** responsible for any unforeseen circumstances, whether good or unfortunate.
 
 # To Do
