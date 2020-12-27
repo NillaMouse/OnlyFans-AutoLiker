@@ -47,7 +47,10 @@ class OnlyFans(Logger):
         super().__init__()
         with open(os.path.join(sys.path[0], 'auth.json')) as f:
             _a = json.load(f)['auth']
-        _a[f"auth_uniq_{_a['auth_id']}"] = _a.pop('auth_uniq_')
+        if not _a['auth_uniq_']:
+            _a.pop('auth_uniq_')
+        else:
+            _a[f"auth_uniq_{_a['auth_id']}"] = _a.pop('auth_uniq_')
         _cookies = [f'{k}={v}' for k, v in _a.items() if k !=
                     'user_agent' and k != 'app_token']
         self.headers = {
