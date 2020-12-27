@@ -1,4 +1,6 @@
 # OnlyFans-AutoLiker
+![Python Version 3.8+](https://img.shields.io/badge/python-3.8-%2338AFF0)
+
 A tool for automatically liking all of a user's posts on OnlyFans
 
 <img src="https://raw.githubusercontent.com/Amenly/OnlyFans-AutoLiker/main/images/autoliker.gif">
