@@ -75,7 +75,7 @@ Once that's all done, you're finally ready to use it!
 In order to use the script, run the following in your terminal:
 
 ```sh
-$ python3 [ScriptName].py -u username [-w action]
+$ python3 autolikeunlike.py -u username [-w action]
 ```
 
 Replace `username` with the username of the creator whose posts you want to like. 
