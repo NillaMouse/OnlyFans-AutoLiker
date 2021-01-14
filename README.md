@@ -75,25 +75,37 @@ Once that's all done, you're finally ready to use it!
 In order to use the script, run the following in your terminal:
 
 ```sh
-$ python3 autoliker.py username
+$ python3 [ScriptName].py -u username [-w action]
 ```
 
-Replace `username` with the username of the creator whose posts you want to like. For example:
+Replace `username` with the username of the creator whose posts you want to like. 
+Replace `action` with the action required. Use 'like' or 'unlike' (without quotes)
+For example:
 
 ```sh
-$ python3 autoliker.py lenatheplugxxx
+$ python3 autolikeunlike.py -u lenatheplugxxx
+$ python3 autolikeunlike.py -u lenatheplugxxx -w like
+^^ These two actions are identical ^^
+
+$ python3 autolikeunlike.py -u lenatheplugxxx -w unlike
+
 ```
 
 # Things to Note
-1. The script runs slowly
+1. The script runs a little quicker now.
 
-You may notice that the script sure does take its sweet, sweet time. This is intentional. I have the script set up to like post after post at a rate that seems 'organic' or 'human'. If you're using it on someone with a million posts, just let it run in the background and do something else.
+The delay has been reduced from between 1 and 2.5 seconds to between 1 and 1.1 seconds.
 
 2. Use it at your own risk
 
 This kind of builds off of the first point. With the current speed, nothing bad should happen but I am ***not*** responsible for any unforeseen circumstances, whether good or unfortunate.
 
-# To Do
+3. This does not process posts which are behind a paywall. That is, if a payment is required to unlock a post, that post will not be actioned by this script.
 
-* Add option to like posts at a faster rate
-* Add ability to unlike posts
+# Updates to To Do list from Amenly
+
+* Posts actioned at a faster rate
+* Option to unlike posts added via command line parameter
+
+# Additional items incorporated
+* Logging of actions to logfile with timestamps
