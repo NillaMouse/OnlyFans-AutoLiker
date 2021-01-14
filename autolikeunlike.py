@@ -164,6 +164,8 @@ class OnlyFans(Logger):
             '(.oOo )',
             '(.oO  )',
             '(.o   )',
+            '(.    )',
+            '(     )',
         ]
         while True:
             for icon in icons:
