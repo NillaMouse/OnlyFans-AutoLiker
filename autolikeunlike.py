@@ -120,19 +120,22 @@ class OnlyFans(Logger):
 
             write_log(f'Parsing {self.username} to determine posts to {self.action}')
             if self.action == 'like':
+                # Grab those posts which have not been marked as 'Favorite' so we can 'like' them
                 favorited_posts = [post for post in posts if not post['isFavorite']]
-                self.ids = [post['id'] for post in favorited_posts if post['canViewMedia']]
-                print(f'Posts scraped with {len(self.ids)} posts to be liked.\n', end='\r')
-                write_log(f'Posts scraped with {len(self.ids)} posts to be liked.')
             elif self.action == 'unlike':
+                # Grab those posts which have been marked as 'Favorite' already so we can 'unlike' them
                 favorited_posts = [post for post in posts if post['isFavorite']]
-                self.ids = [post['id'] for post in favorited_posts if post['canViewMedia']]
-                print(f'Posts scraped with {len(self.ids)} posts to be unliked.\n', end='\r')
-                write_log(f'Posts scraped with {len(self.ids)} posts to be unliked.')
+
+            # Only include those posts in which we can view the Media (ie - exclude the payment required posts)
+            self.ids = [post['id'] for post in favorited_posts if post['canViewMedia']] 
+            
+            print(f'Posts scraped with {len(self.ids)} posts to be {self.action}d.\n', end='\r')
+            write_log(f'Posts scraped with {len(self.ids)} posts to be {self.action}d.')
+
             write_log(f'Parsing {self.username} completed - {len(self.ids)} to be actioned.')
             if len(self.ids):
+                #If there is at least 1 post to action, record the id number to the logfile
                 write_log(f'IDs : {self.ids}')
-            
         else:
             self.stop = True
             self.log.error(f'Unable to scrape posts -- Received {r.status_code} STATUS CODE')
@@ -142,14 +145,15 @@ class OnlyFans(Logger):
         self.stop = True
         length = len(self.ids)
         if length:
+            digits = int(math.log10(length))+1
             enum = enumerate(self.ids, 1)
             for c, post_id in enum:
                 time.sleep(random.uniform(1, 1.1))
                 with requests.Session() as s:
                     r = s.post(FAVORITE_URL.format(post_id, self.id, self.app_token), headers=self.headers)
                 if r.ok:
-                    print(f'Post {c} of {length} : Successfully {self.action}d', end='\r')
-                    write_log(f'Post {c} of {length}  - URL : http://onlyfans.com/{post_id}/{self.username}/ - Action taken : {self.action}d')
+                    print(f'Post {str(c).zfill(digits)} of {length} : Successfully {self.action}d', end='\r')
+                    write_log(f'Post {str(c).zfill(digits)} of {length}  - URL : http://onlyfans.com/{post_id}/{self.username}/ - Action taken : {self.action}d')
                 else:
                     self.log.error(f'Unable to action post {post_id} -- Received {r.status_code} STATUS CODE')
                     write_log(f'Unable to action post {post_id} of {self.username} due to error {r.status_code} - URL : http://onlyfans.com/{post_id}/{self.username}')
@@ -179,8 +183,6 @@ def write_log(logmessage):
         df = open("OF.log","a")
         df.write(f'{curr_time} - {logmessage}\n')
         df.close()
-
-
 
 def main():
     parser = argparse.ArgumentParser()
