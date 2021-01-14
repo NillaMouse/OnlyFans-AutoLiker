@@ -140,36 +140,43 @@ class OnlyFans(Logger):
             self.stop = True
             self.log.error(f'Unable to scrape posts -- Received {r.status_code} STATUS CODE')
             write_log(f'Unable to scrape posts -- Received {r.status_code} STATUS CODE')
+            self.htmlerrors = True
 
     def action_posts(self):
         self.stop = True
-        length = len(self.ids)
-        if length:
-            digits = int(math.log10(length))+1
-            enum = enumerate(self.ids, 1)
-            for c, post_id in enum:
-                time.sleep(random.uniform(1, 1.1))
-                with requests.Session() as s:
-                    r = s.post(FAVORITE_URL.format(post_id, self.id, self.app_token), headers=self.headers)
-                if r.ok:
-                    print(f'Post {str(c).zfill(digits)} of {length} : Successfully {self.action}d', end='\r')
-                    write_log(f'Post {str(c).zfill(digits)} of {length}  - URL : http://onlyfans.com/{post_id}/{self.username}/ - Action taken : {self.action}d')
-                else:
-                    self.log.error(f'Unable to action post {post_id} -- Received {r.status_code} STATUS CODE')
-                    write_log(f'Unable to action post {post_id} of {self.username} due to error {r.status_code} - URL : http://onlyfans.com/{post_id}/{self.username}')
+
+        user_commit = input("\nDo you wish to proceed [Y/N]?\n")
+        if user_commit.lower() != "y":
+            write_log(f'Operator opted to not proceed with "{self.action}" actioning of {len(self.ids)} posts.')
+        else:
+            length = len(self.ids)
+            if length:
+                digits = int(math.log10(length))+1
+                enum = enumerate(self.ids, 1)
+                for c, post_id in enum:
+                    time.sleep(random.uniform(1, 1.1))
+                    with requests.Session() as s:
+                        r = s.post(FAVORITE_URL.format(post_id, self.id, self.app_token), headers=self.headers)
+                    if r.ok:
+                        print(f'Post {str(c).zfill(digits)} of {length} : Successfully {self.action}d', end='\r')
+                        write_log(f'Post {str(c).zfill(digits)} of {length}  - URL : http://onlyfans.com/{post_id}/{self.username}/ - Action taken : {self.action}d')
+                    else:
+                        self.log.error(f'Unable to action post {post_id} -- Received {r.status_code} STATUS CODE')
+                        write_log(f'Unable to action post {post_id} of {self.username} due to error {r.status_code} - URL : http://onlyfans.com/{post_id}/{self.username}')
 
     def spinner(self):
         icons = [
-            '(.    )',
-            '(.o   )',
-            '(.oO  )',
-            '(.oOo )',
-            '(.oOo.)',
-            '(.oOo )',
-            '(.oO  )',
-            '(.o   )',
-            '(.    )',
-            '(     )',
+            '     ',
+            '.    ',
+            '.o   ',
+            '.oO  ',
+            '.oOo ',
+            '.oOo.',
+            '.oOo ',
+            '.oO  ',
+            '.o   ',
+            '.    ',
+            '     ',
         ]
         while True:
             for icon in icons:
